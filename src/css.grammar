@@ -1,10 +1,12 @@
+@dialects { scss }
+
 @precedence {
   attribute @left,
   structure @left,
   valueOp @left
 }
 
-@skip { whitespace | Comment }
+@skip { whitespace | BlockComment | LineComment }
 
 @top StyleSheet { item* }
 
@@ -161,19 +163,21 @@ kw<term> { @specialize[@name={term}]<identifier, term> }
 
   whitespace { @whitespace+ }
 
-  Comment { "/*" commentRest }
+  LineComment[@dialect=scss,@name=Comment] { "//" ![\n]* }
+
+  BlockComment[@name=Comment] { "/*" commentRest }
 
   commentRest { ![*] commentRest | "*" commentAfterStar }
 
   commentAfterStar { "/" | "*" commentAfterStar | ![/*] commentRest }
 
-  @precedence { Comment, BinOp }
+  @precedence { BlockComment, LineComment, BinOp }
 
   hexDigit { @digit | $[a-fA-F] }
 
   ParenthesizedContent { !['")] ![)]+ }
 
-  @precedence { whitespace, ParenthesizedContent, Comment }
+  @precedence { whitespace, ParenthesizedContent, BlockComment, LineComment }
 
   ColorLiteral {
     "#" hexDigit hexDigit hexDigit (hexDigit (hexDigit hexDigit (hexDigit hexDigit)?)?)?

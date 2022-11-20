@@ -1,0 +1,24 @@
+# Single line comments {"dialect": "scss"}
+
+// Single line comment
+
+==>
+
+StyleSheet(Comment)
+
+# Multiple line comments {"dialect": "scss"}
+
+// First line comment
+// Second line comment
+
+==>
+
+StyleSheet(Comment,Comment)
+
+# Mixed block and line comments {"dialect": "scss"}
+
+/* // first comment */ // second /* comment */
+
+==>
+
+StyleSheet(Comment,Comment)
