@@ -71,3 +71,29 @@ $border-radius: 0.25em !default;
 StyleSheet(
   Declaration(VariableName,ColorLiteral,Default),
   Declaration(VariableName,NumberLiteral(Unit),Default))
+
+# Use statements {"dialect": "scss"}
+
+@use "sass:map";
+@use "base";
+
+==>
+
+StyleSheet(
+  UseStatement(use,StringLiteral),
+  UseStatement(use,StringLiteral))
+
+# Use statements with configuration {"dialect": "scss"}
+
+@use 'library' with (
+  $black: #222,
+  $border-radius: 0.1rem
+);
+
+==>
+
+StyleSheet(
+  UseStatement(use,StringLiteral,
+    OverrideList(
+      VariableName,ColorLiteral,
+      VariableName,NumberLiteral(Unit))))

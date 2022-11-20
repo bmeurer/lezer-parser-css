@@ -13,6 +13,7 @@
 item {
   RuleSet |
   ImportStatement |
+  UseStatement |
   MediaStatement |
   CharsetStatement |
   NamespaceStatement |
@@ -28,6 +29,16 @@ RuleSet {
 
 ImportStatement {
   @specialize[@name=import]<AtKeyword, "@import"> value commaSep<query> ";"
+}
+
+UseStatement {
+  @specialize[@dialect=scss,@name=use]<AtKeyword, "@use"> value
+  ("with" OverrideList)?
+  ";"
+}
+
+OverrideList {
+  "(" commaSep<(sassVariableName ":" value)> ")"
 }
 
 MediaStatement {
