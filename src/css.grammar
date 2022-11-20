@@ -13,6 +13,7 @@
 item {
   RuleSet |
   ImportStatement |
+  ForwardStatement |
   UseStatement |
   MediaStatement |
   CharsetStatement |
@@ -31,6 +32,13 @@ ImportStatement {
   @specialize[@name=import]<AtKeyword, "@import"> value commaSep<query> ";"
 }
 
+ForwardStatement {
+  @specialize[@dialect=scss,@name=forward]<AtKeyword, "@forward"> value
+  ("with" OverrideList)?
+  (("show" | "hide") commaSep<sassVariableName | VariableName { identifier }>)?
+  ";"
+}
+
 UseStatement {
   @specialize[@dialect=scss,@name=use]<AtKeyword, "@use"> value
   ("with" OverrideList)?
@@ -38,7 +46,7 @@ UseStatement {
 }
 
 OverrideList {
-  "(" commaSep<(sassVariableName ":" value+)> ")"
+  "(" commaSep<(sassVariableName ":" value+ Default?)> ")"
 }
 
 MediaStatement {

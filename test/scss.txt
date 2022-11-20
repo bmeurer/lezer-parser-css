@@ -110,3 +110,29 @@ StyleSheet(
     OverrideList(
       VariableName,ColorLiteral,
       VariableName,NumberLiteral(Unit))))
+
+# Forward statement with configuration {"dialect": "scss"}
+
+@forward 'library' with (
+  $black: #222 !default,
+  $border-radius: 0.1rem !default
+);
+
+==>
+
+StyleSheet(
+  ForwardStatement(forward,StringLiteral,
+    OverrideList(
+      VariableName,ColorLiteral,Default,
+      VariableName,NumberLiteral(Unit),Default)))
+
+# Forward statements with visibility {"dialect": "scss"}
+
+@forward "src/list" hide list-reset, $horizontal-list-gap;
+@forward "src/list" show tree-reset, $horizontal_tree_gap;
+
+==>
+
+StyleSheet(
+  ForwardStatement(forward,StringLiteral,VariableName,VariableName),
+  ForwardStatement(forward,StringLiteral,VariableName,VariableName))

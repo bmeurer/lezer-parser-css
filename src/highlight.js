@@ -1,8 +1,7 @@
 import {styleTags, tags as t} from "@lezer/highlight"
 
 export const cssHighlighting = styleTags({
-  'AtKeyword import use charset namespace keyframes media supports':
-      t.definitionKeyword,
+  'AtKeyword import forward use charset namespace keyframes media supports': t.definitionKeyword,
   'from to selector': t.keyword,
   NamespaceName: t.namespace,
   KeyframeName: t.labelName,
