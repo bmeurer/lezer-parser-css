@@ -22,7 +22,7 @@ export const cssHighlighting = styleTags({
   MatchOp: t.compareOperator,
   "ChildOp SiblingOp, LogicOp": t.logicOperator,
   BinOp: t.arithmeticOperator,
-  Important: t.modifier,
+  'Default Important': t.modifier,
   Comment: t.blockComment,
   ParenthesizedContent: t.special(t.name),
   ColorLiteral: t.color,

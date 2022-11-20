@@ -60,3 +60,14 @@ StyleSheet(
     Declaration(PropertyName,VariableName),
     Comment,
     Declaration(VariableName,NumberLiteral(Unit)))))
+
+# Variables with default values {"dialect": "scss"}
+
+$black: #000 !default;
+$border-radius: 0.25em !default;
+
+==>
+
+StyleSheet(
+  Declaration(VariableName,ColorLiteral,Default),
+  Declaration(VariableName,NumberLiteral(Unit),Default))

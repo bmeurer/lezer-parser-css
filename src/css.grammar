@@ -19,7 +19,7 @@ item {
   KeyframesStatement |
   SupportsStatement |
   AtRule |
-  Declaration { sassVariableName ":" value ";" }
+  Declaration { sassVariableName ":" value Default? ";" }
 }
 
 RuleSet {
@@ -160,6 +160,8 @@ kw<term> { @specialize[@name={term}]<identifier, term> }
   LogicOp { "and" | "or" }
 
   BinOp { $[+\-*/] }
+
+  Default[@dialect=scss] { "!default" }
 
   Important { "!important" }
 
