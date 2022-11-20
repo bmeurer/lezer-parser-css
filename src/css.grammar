@@ -18,7 +18,8 @@ item {
   NamespaceStatement |
   KeyframesStatement |
   SupportsStatement |
-  AtRule
+  AtRule |
+  Declaration { sassVariableName ":" value ";" }
 }
 
 RuleSet {
@@ -105,6 +106,7 @@ query {
 
 value {
   VariableName |
+  sassVariableName |
   ValueName { identifier } |
   ParenthesizedValue { "(" value ")" } |
   ColorLiteral |
@@ -194,6 +196,8 @@ kw<term> { @specialize[@name={term}]<identifier, term> }
   ":" "::" ";" ","
 
   "(" ")" "[" "]" "{" "}"
+
+  sassVariableName[@dialect=scss,@name=VariableName] { "$" @asciiLetter (@asciiLetter | @digit | "-" | "_")* }
 }
 
 @external propSource cssHighlighting from "./highlight"

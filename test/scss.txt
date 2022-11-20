@@ -22,3 +22,41 @@ StyleSheet(Comment,Comment)
 ==>
 
 StyleSheet(Comment,Comment)
+
+# Variables in top-level {"dialect": "scss"}
+
+$my-variable: 1px;
+
+==>
+
+StyleSheet(Declaration(VariableName,NumberLiteral(Unit)))
+
+# Variables in declarations {"dialect": "scss"}
+
+foo {
+  $my-variable: white;
+  color: $my-variable;
+}
+
+==>
+
+StyleSheet(RuleSet(TagSelector(TagName),Block(
+  Declaration(VariableName,ValueName),
+  Declaration(PropertyName,VariableName))))
+
+# Variables with underscores {"dialect": "scss"}
+
+$my_variable: 14em;
+foo {
+  font-size: $my-variable; // Ignored
+  $my-variable: 15px;
+}
+
+==>
+
+StyleSheet(
+  Declaration(VariableName,NumberLiteral(Unit)),
+  RuleSet(TagSelector(TagName),Block(
+    Declaration(PropertyName,VariableName),
+    Comment,
+    Declaration(VariableName,NumberLiteral(Unit)))))
