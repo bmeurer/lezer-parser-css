@@ -20,7 +20,7 @@ item {
   KeyframesStatement |
   SupportsStatement |
   AtRule |
-  Declaration { sassVariableName ":" value Default? ";" }
+  Declaration { sassVariableName ":" value (","? value)* Default? ";" }
 }
 
 RuleSet {
@@ -38,7 +38,7 @@ UseStatement {
 }
 
 OverrideList {
-  "(" commaSep<(sassVariableName ":" value)> ")"
+  "(" commaSep<(sassVariableName ":" value+)> ")"
 }
 
 MediaStatement {

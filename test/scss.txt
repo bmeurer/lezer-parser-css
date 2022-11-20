@@ -31,6 +31,19 @@ $my-variable: 1px;
 
 StyleSheet(Declaration(VariableName,NumberLiteral(Unit)))
 
+# Variables with multiple values {"dialect": "scss"}
+
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15);
+
+==>
+
+StyleSheet(
+  Declaration(VariableName,
+    NumberLiteral,
+    NumberLiteral(Unit),
+    NumberLiteral(Unit),
+    CallExpression(Callee,ArgList(VariableName,NumberLiteral))))
+
 # Variables in declarations {"dialect": "scss"}
 
 foo {
